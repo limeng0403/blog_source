@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-sm-12">
+        <% page.posts.sort('-date').each(function(obj,i){ %>
+            <div class="row box-wrapper">
+                <div class="col-sm-2 box-date">
+                    <p><%- date(obj.date, 'DD') %></p>
+                    <p><%- date(obj.date, 'MM/YYYY') %></p>
+                </div>
+                <div class="col-sm-10 box-content">
+                    <h3><a href="<%= url_for(obj.path) %>" target="_blank"><%= obj.title %></a></h3>
+
+                    <p>
+                    <% obj.tags.each(function(o,i){ %>
+                        <%= o.name %>
+                    <% }) %>
+                    </p>
+                    
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>my theme</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link type="text/css" href="/css/index.css" rel="stylesheet" />
+</head>
+<style type="text/css">
+
+</style>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+    <div class="col-sm-12">
+        <div class="row box-wrapper">
+            <div class="col-sm-2 box-date">
+                <p>18</p>
+                <p>05/2016</p>
+            </div>
+            <div class="col-sm-10 box-content">
+                <h3>
+                  <a href="/2016/05/18/Angularjs轻松实现表格按指定列排序/" target="_blank">
+                    Angularjs轻松实现表格按指定列排序
+                  </a>
+                </h3>
+
+                <p>
+                  
+                      javascript
+                  
+                      angularjs
+                  
+                </p>
+
+                <p>使用Angularjs的过滤器，可以很容易的实现在表格中，点击某一列标题进行排序，实现过程如下：</p>
+<p>html代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">class</span>=<span class="string">"table table-border"</span> <span class="attr">ng-app</span>=<span class="string">"myapp"</span> <span class="attr">ng-controller</span>=<span class="string">"orderByCtrl"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span>&gt;</span>inx<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span> <span class="attr">ng-click</span>=<span class="string">"col='name';desc=!desc"</span>&gt;</span>name<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 当点击列标题时，执行click事件，将排序条件反转，即，如果原来是升序则将按降序，降序亦如此 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span> <span class="attr">ng-click</span>=<span class="string">"col='gender';desc=!desc"</span>&gt;</span>gender<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span> <span class="attr">ng-click</span>=<span class="string">"col='age';desc=!desc"</span>&gt;</span>age<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">th</span> <span class="attr">ng-click</span>=<span class="string">"col='score';desc=!desc"</span>&gt;</span>score<span class="tag">&lt;/<span class="name">th</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">thead</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span> <span class="attr">ng-repeat</span>=<span class="string">"d in data|orderBy:col:desc"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span> <span class="attr">ng-bind</span>=<span class="string">"$index+1"</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span> <span class="attr">ng-bind</span>=<span class="string">"d.name"</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span> <span class="attr">ng-bind</span>=<span class="string">"d.gender"</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span> <span class="attr">ng-bind</span>=<span class="string">"d.age"</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span> <span class="attr">ng-bind</span>=<span class="string">"d.score"</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>js代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'myapp'</span>, []);</span><br><span class="line"></span><br><span class="line">app.controller(<span class="string">'orderByCtrl'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">    $scope.col = <span class="string">'name'</span>;<span class="comment">//默认按name列排序</span></span><br><span class="line">    $scope.desc = <span class="number">0</span>;<span class="comment">//默认排序条件升序</span></span><br><span class="line">    $scope.data = [&#123;</span><br><span class="line">        name: <span class="string">'name 1'</span>,</span><br><span class="line">        gender: <span class="string">'male'</span>,</span><br><span class="line">        age: <span class="number">26</span>,</span><br><span class="line">        score: <span class="number">70</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        name: <span class="string">'name 2'</span>,</span><br><span class="line">        gender: <span class="string">'female'</span>,</span><br><span class="line">        age: <span class="number">24</span>,</span><br><span class="line">        score: <span class="number">84</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        name: <span class="string">'name 3'</span>,</span><br><span class="line">        gender: <span class="string">'male'</span>,</span><br><span class="line">        age: <span class="number">20</span>,</span><br><span class="line">        score: <span class="number">76</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        name: <span class="string">'name 4'</span>,</span><br><span class="line">        gender: <span class="string">'female'</span>,</span><br><span class="line">        age: <span class="number">22</span>,</span><br><span class="line">        score: <span class="number">64</span></span><br><span class="line">    &#125;];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>让运行界面好看些，使用了bootstrap.min.css样式库。为了交互性考虑，在表头增加了手指样式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">th</span> &#123;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果<a href="https://jsfiddle.net/Lionney/xowyoaxj/" target="_blank" rel="external">点击这里</a>查看</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+  </div>
+  <div class="footer">
+  <p>感谢hexo(https://hexo.io)提供技术支持</p>
+  <p>2010-2016</p>
+  </div>
+  <script src="https://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</body>
+
+</html>

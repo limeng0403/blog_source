@@ -72,5 +72,5 @@ deploy:
   repository: git@github.com:limeng0403/limeng0403.github.io.git
   branch: master
 - type: git
-  repository: https://git.coding.net/lionney/blog.git
+  repository: https://git.coding.net/lionney/Lionney.git
   branch: master

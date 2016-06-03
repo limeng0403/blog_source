@@ -1,32 +1,5 @@
 <style type="text/css">
-*{
-    box-sizing: border-box;
-    font-family: ""
-}
 
-.box-wrapper{
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    background: #eee;
-}
-.box-date{
-    text-align: right;
-}
-.box-date p:first-child{
-    font-size: 24px;
-    font-weight: bolder;
-}
-.box-date p:last-child{
-    
-}
-.box-content{
-    background: #fefefe;
-}
-.box-content h3:first-child{
-    box-shadow: 0 0 8px #ccc;
-    padding: 8px;
-}
 </style>
 
 <div class="row">
@@ -35,7 +8,9 @@
             <% site.tags.each(function(obj,i){ %>
                 <li class="list-group-item">
                     <span class="badge"><%= obj.length %></span>
-                    <%= obj.name %>
+                    <a href="<%= url_for('tags/'+obj.name+'/') %>" target="_blank">
+                        <%= obj.name %>
+                    </a>
                 </li>
             <% }) %>
         </ul>
@@ -44,14 +19,18 @@
         <% site.posts.sort('-date').each(function(obj,i){ %>
             <div class="row box-wrapper">
                 <div class="col-sm-2 box-date">
-                    <p><%- date(obj.date, 'D') %></p>
+                    <p><%- date(obj.date, 'DD') %></p>
                     <p><%- date(obj.date, 'MM/YYYY') %></p>
                 </div>
                 <div class="col-sm-10 box-content">
-                    <h3><%= obj.title %></h3>
+                    <h3><a href="<%= url_for(obj.path) %>" target="_blank"><%= obj.title %></a></h3>
+
                     <p>
-                        <%- obj.content %>
+                    <% obj.tags.each(function(o,i){ %>
+                        <%= o.name %>
+                    <% }) %>
                     </p>
+                    
                 </div>
             </div>
         <% }) %>

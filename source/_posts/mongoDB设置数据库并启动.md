@@ -1,7 +1,7 @@
 ---
 title: mongoDB设置数据库并启动
 tags: [database,mongodb]
-date: 2015/02/02
+date: 2015/09/18
 ---
 
 ```
