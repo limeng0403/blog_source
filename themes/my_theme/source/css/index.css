@@ -9,6 +9,10 @@ body {
     padding: 8px 10px 0 0;
 }
 
+img {
+    max-width: 100%;
+}
+
 .box-wrapper {
     border: 1px solid #ccc;
     border-radius: 8px;
