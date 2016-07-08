@@ -68,12 +68,6 @@ theme: my_theme
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-- type: github
-  repo: git@github.com:limeng0403/limeng0403.github.io.git
-  branch: master
-- type: git
-  repo: https://git.coding.net/lionney/lionney.git
-  branch: master
 - deploy:
   type: ftpsync
   host: 103.213.245.160
@@ -81,4 +75,8 @@ deploy:
   pass: hexo
   remote: /
   port: 21
+  ignore: .user.ini
+- type: git
+  repo: https://git.coding.net/lionney/lionney.git
+  branch: master
 
