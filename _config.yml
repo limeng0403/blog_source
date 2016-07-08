@@ -74,11 +74,11 @@ deploy:
 - type: git
   repo: https://git.coding.net/lionney/lionney.git
   branch: master
-- type: rsync
+- deploy:
+  type: ftpsync
   host: 103.213.245.160
-  user: root
-  root: /home/wwwroot/blog/
-  port: 22
-  delete: true
-  verbose: true
-  ignore_errors: false
+  user: hexo
+  pass: hexo
+  remote: /
+  port: 21
+
