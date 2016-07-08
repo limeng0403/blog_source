@@ -1,3 +1,9 @@
+---
+title: 解决g++command not found
+tags: [linux,g++]
+date: 2013/10/11
+---
+
 在安装一些包的时候，遇到g++:command not found error,这是由于系统缺失相对应的包
 
 1-在发现该错误时，先在系统中确认是否缺失相对应的包：

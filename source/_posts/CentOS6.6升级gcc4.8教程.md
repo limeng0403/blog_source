@@ -1,3 +1,9 @@
+---
+title: CentOS6.6升级gcc4.8教程
+tags: [linux,centos]
+date: 2016/03/03
+---
+
 centOS6.6最高版本的gcc也只到4.4.7版本,只好手动升级一下了。
 
 ***下载4.8.2源码***

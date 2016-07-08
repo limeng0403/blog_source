@@ -1,3 +1,9 @@
+---
+title: How can i use iptables on centos 7
+tags: [linux,centos]
+date: 2016/02/18
+---
+
 I installed CentOS 7 with minimal configuration (os + dev tools). I am trying to open 80 port for httpdservice, but something wrong with my iptables service ... what's wrong with it? What am I doing wrong?
 
 ```

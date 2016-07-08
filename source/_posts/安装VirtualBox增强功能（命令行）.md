@@ -1,3 +1,9 @@
+---
+title: 安装VirtualBox增强功能（命令行）
+tags: [virtualbox]
+date: 2012/01/05
+---
+
 ###安装VirtualBox增强功能
 
 1、加载VBoxGuestAdditons.iso镜像文件，直接通过Linux虚拟机窗口的菜单“设备”->“安装增强功能”来添加镜像文件，虚拟机会自动添加镜像到/dev/cdrom文件中去，添加镜像后无需重启。

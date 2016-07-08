@@ -1,3 +1,9 @@
+---
+title: 在Ubuntu上安装PPTP的VPN服务
+tags: [linux,ubuntu]
+date: 2016/06/14
+---
+
 ### 安装PPTP服务。
 
 ```bash

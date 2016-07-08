@@ -1,3 +1,9 @@
+---
+title: SVN的Hooks功能——强制添加注释
+tags: [linux,svn]
+date: 2013/09/09
+---
+
 1. 强制添加注释信息
  
 用户提交代码的动作，对应的是pre-commit。因此，可以修改pre-commit.tmpl文件。

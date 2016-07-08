@@ -1,3 +1,9 @@
+---
+title: linux下如何启动SVN服务
+tags: [linux,svn]
+date: 2014/05/05
+---
+
 先转到SVN的安装目录，比如，你安装在/home/svn 下面。
 
 然后转到bin目录下，在这里可以看见一个叫svnserve的文件，我们需要用这个来启动SVN服务。

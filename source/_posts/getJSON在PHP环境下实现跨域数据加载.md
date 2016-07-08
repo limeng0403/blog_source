@@ -1,6 +1,7 @@
 ---
 title: getJSON在PHP环境下实现跨域数据加载
 tags: [javascript,json]
+date: 2014/06/06
 ---
 
 getJSON在PHP环境下实现跨域数据加载，此方法适合方便自己写服务端的程序员，如果非自管服务器，返回数据应该遵循此规则，否则无法实现。

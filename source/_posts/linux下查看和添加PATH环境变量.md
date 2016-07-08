@@ -1,3 +1,9 @@
+---
+title: linux下查看和添加PATH环境变量
+tags: [linux]
+date: 2014/07/07
+---
+
 通过`$ echo $PATH`查看当前的搜索路径。
 
 可用`$ export`命令查看PATH值

@@ -1,3 +1,9 @@
+---
+title: 使用git pull文件时和本地文件冲突怎么办？
+tags: [git]
+date: 2016/06/07
+---
+
 同事在使用`git pull`代码时，经常会碰到有冲突的情况，提示如下信息：
 
 >error: Your local changes to 'c/environ.c' would be overwritten by merge.  Aborting.

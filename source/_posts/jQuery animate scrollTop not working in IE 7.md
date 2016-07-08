@@ -1,6 +1,6 @@
 ---
 title: jQuery animate scrollTop not working in IE 7
-tags: [javascript jquery]
+tags: [javascript,jquery]
 date: 2016/04/05
 ---
 
