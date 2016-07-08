@@ -68,7 +68,7 @@ theme: my_theme
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-- type: git
+- type: github
   repo: git@github.com:limeng0403/limeng0403.github.io.git
   branch: master
 - type: git
