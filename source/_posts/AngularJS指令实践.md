@@ -1,7 +1,7 @@
 ---
-title: AngularJS 指令实践
-tags: [angularjs]
-date: 2016-8-3
+title: Angularjs指令实践
+tags: [javascript,angularjs]
+date: 2016/08/03
 ---
 
 指令（Directives）是所有AngularJS应用最重要的部分。尽管AngularJS已经提供了非常丰富的指令，但还是经常需要创建应用特定的指令。这篇教程会为你讲述如何自定义指令，以及介绍如何在实际项目中使用。在这篇文章的最后，我会指导你如何使用Angular指令来创建一个简单的记事本应用。
@@ -22,11 +22,11 @@ date: 2016-8-3
 
 一个Angular指令可以有以下的四种表现形式：
 
-1. 一个新的HTML元素（<data-picker></data-picker>）
+1. 一个新的HTML元素（`<data-picker></data-picker>`）
 
-2. 元素的属性（<input type=”text” data-picker/>）
+2. 元素的属性（`<input type=”text” data-picker/>`）
 
-3. CSS class（<input type=”text” class=”data-picker”/>）
+3. CSS class（`<input type=”text” class=”data-picker”/>`）
 
 4. 注释（`<!–directive:data-picker –>`）
 
@@ -34,19 +34,12 @@ date: 2016-8-3
 
 ```javascript
 var app = angular.module('myapp', []);
-
 app.directive('helloWorld', function() {
-
   return {
-
       restrict: 'AE',
-
       replace: 'true',
-
       template: '<h3>Hello World!!</h3>'
-
   };
-
 });
 ```
 
@@ -54,9 +47,7 @@ app.directive('helloWorld', function() {
 
 ```html
 <hello-world/>
-
 //OR
-
 <hello:world/>
 ```
 
@@ -64,9 +55,7 @@ app.directive('helloWorld', function() {
 
 ```html
 <div hello-world></div>
-
 //OR
-
 <div hello:world/>
 ```
 
@@ -74,9 +63,7 @@ app.directive('helloWorld', function() {
 
 ```html
 <div data-hello-world></div>
-
 //OR
-
 <div x-hello-world></div>
 ```
 
@@ -84,8 +71,8 @@ restrict – 这个属性用来指定指令在HTML中如何使用（还记得之
 
 **注意：** 在匹配指令的时候，Angular会在元素或者属性的名字中剔除 x- 或者 data- 前缀。 然后将 – 或者 : 连接的字符串转换成驼峰(camelCase)表现形式，然后再与注册过的指令进行匹配。这是为什么，我们在HTML中以 hello-world 的方式使用 helloWorld 指令。其实，这跟HTML对标签和属性不区分大小写有关。 尽管上面的指令仅仅实现了静态文字的显示，但是这里还是有一些有趣的点值得我们去挖掘。我们在指令定义过程中使用了三个属性来配置指令。我们来一一介绍他们的作用。
 
-- template – 这个属性规定了指令被Angular编译和链接（link）后生成的HTML标记。这个属性值不一定要是简单的字符串。template 可以非常复杂，而且经常包含其他的指令，以及表达式({{ }})等。更多的情况下你可能会见到 templateUrl， 而不是 template。所以，理想情况下，你应该将模板放到一个特定的HTML文件中，然后将 templateUrl 属性指向它。
-- replace – 这个属性指明生成的HTML内容是否会替换掉定义此指令的HTML元素。在我们的例子中，我们用 <hello-world></hello-world>的方式使用我们的指令，并且将 replace 设置成 true。所以，在指令被编译之后，生成的模板内容替换掉了 <hello-world></hello-world>。最终的输出是 <h3>Hello World!!</h3>。如果你将 replace 设置成 false，也就是默认值，那么生成的模板会被插入到定义指令的元素中。
+- template – 这个属性规定了指令被Angular编译和链接（link）后生成的HTML标记。这个属性值不一定要是简单的字符串。template 可以非常复杂，而且经常包含其他的指令，以及表达式等。更多的情况下你可能会见到 templateUrl， 而不是 template。所以，理想情况下，你应该将模板放到一个特定的HTML文件中，然后将 templateUrl 属性指向它。
+- replace – 这个属性指明生成的HTML内容是否会替换掉定义此指令的HTML元素。在我们的例子中，我们用 `<hello-world></hello-world>`的方式使用我们的指令，并且将 replace 设置成 true。所以，在指令被编译之后，生成的模板内容替换掉了 `<hello-world></hello-world>`。最终的输出是 `<h3>Hello World!!</h3>`。如果你将 replace 设置成 false，也就是默认值，那么生成的模板会被插入到定义指令的元素中。
 
 打开这个 [plunker](http://plnkr.co/edit/GKI339z2VDdZTOE2bGFP)，在”Hello World!!”右键检查元素内容，来更形象地明白这些。
 
@@ -95,11 +82,8 @@ restrict – 这个属性用来指定指令在HTML中如何使用（还记得之
 
 ```html
 <body ng-controller="MainCtrl">
-
   <input type="text" ng-model="color" placeholder="Enter a color" />
-
   <hello-world/>
-
 </body>
 ```
 
@@ -107,31 +91,19 @@ JavaScript修改后的 helloWorld 指令如下：
 
 ```javascript
 app.directive('helloWorld', function() {
-
   return {
     restrict: 'AE',
     replace: true,
-
-    template: '<p style="background-color:{{color}}">Hello World',
-
+    template: '<p style="background-color:{ {color} }">Hello World',
     link: function(scope, elem, attrs) {
-
       elem.bind('click', function() {
-
         elem.css('background-color', 'white');
-
         scope.$apply(function() {
-
           scope.color = "white";
-
         });
-
       });
-
       elem.bind('mouseover', function() {
-
         elem.css('cursor', 'pointer');
-
       });
     }
   };
@@ -143,7 +115,7 @@ scope – 指令的scope。在我们的例子中，指令的scope就是父contro
 - elem – 指令的jQLite(jQuery的子集)包装DOM元素。如果你在引入AngularJS之前引入了jQuery，那么这个元素就是jQuery元素，而不是jQLite元素。由于这个元素已经被jQuery/jQLite包装了，所以我们就在进行DOM操作的时候就不需要再使用 $()来进行包装。
 - attr – 一个包含了指令所在元素的属性的标准化的参数对象。举个例子，你给一个HTML元素添加了一些属性：，那么可以在 link 函数中通过 attrs.someAttribute 来使用它。
 
-link函数主要用来为DOM元素添加事件监听、监视模型属性变化、以及更新DOM。在上面的指令代码片段中，我们添加了两个事件， click，和 mouseover。click 处理函数用来重置 <p> 的背景色，而 mouseover 处理函数改变鼠标为 pointer。在模板中有一个表达式 {{color}}，当父scope中的 color 发生变化时，它用来改变 Hello World 文字的背景色。 这个 plunker 演示了这些概念。
+link函数主要用来为DOM元素添加事件监听、监视模型属性变化、以及更新DOM。在上面的指令代码片段中，我们添加了两个事件， click，和 mouseover。click 处理函数用来重置 `<p>` 的背景色，而 mouseover 处理函数改变鼠标为 pointer。在模板中有一个表达式 `{ {color} }`，当父scope中的 color 发生变化时，它用来改变 Hello World 文字的背景色。 这个 plunker 演示了这些概念。
 
 ### compile函数
 
@@ -156,17 +128,11 @@ compile 函数在 link 函数被执行之前用来做一些DOM改造。它接收
 
 ```javascript
 app.directive('test', function() {
-
   return {
-
     compile: function(tElem,attrs) {
-
       //do optional DOM transformation here
-
       return function(scope,elem,attrs) {
-
         //linking function here
-
       };
     }
   };
@@ -188,19 +154,12 @@ app.directive('test', function() {
 
 ```javascript
 app.directive('helloWorld', function() {
-
   return {
-
     scope: true,  // use a child scope that inherits from parent
-
     restrict: 'AE',
-
     replace: 'true',
-
     template: '<h3>Hello World!!</h3>'
-
   };
-
 });
 ```
 
@@ -208,23 +167,16 @@ app.directive('helloWorld', function() {
 
 ```javascript
 app.directive('helloWorld', function() {
-
   return {
-
     scope: {},  // use a new isolated scope
-
     restrict: 'AE',
-
     replace: 'true',
-
     template: '<h3>Hello World!!</h3>'
-
   };
-
 });
 ```
 
-这个指令使用了一个隔离的scope。隔离的scope在我们想要创建可重用的指令的时候是非常有好处的。通过使用隔离的scope，我们能够保证我们的指令是自包含的，可以被很容易的插入到HTML应用中。 它内部不能访问父的scope，所保证了父scope不被污染。 在我们的 helloWorld 指令例子中，如果我们将 scope 设置成 {}，那么上面的代码将不会工作。 它会创建一个新的隔离的scope，那么相应的表达式 {{color}} 会指向到这个新的scope中，它的值将是 undefined. 使用隔离的scope并不意味着我们完全不能访问父scope的属性。
+这个指令使用了一个隔离的scope。隔离的scope在我们想要创建可重用的指令的时候是非常有好处的。通过使用隔离的scope，我们能够保证我们的指令是自包含的，可以被很容易的插入到HTML应用中。 它内部不能访问父的scope，所保证了父scope不被污染。 在我们的 helloWorld 指令例子中，如果我们将 scope 设置成 {}，那么上面的代码将不会工作。 它会创建一个新的隔离的scope，那么相应的表达式 `{ {color} }` 会指向到这个新的scope中，它的值将是 undefined. 使用隔离的scope并不意味着我们完全不能访问父scope的属性。
 
 ### 隔离scope和父scope之间的数据绑定
 
@@ -234,35 +186,20 @@ app.directive('helloWorld', function() {
 
 ```javascript
 app.directive('helloWorld', function() {
-
   return {
-
     scope: {},
-
     restrict: 'AE',
-
     replace: true,
-
-    template: '<p style="background-color:{{color}}">Hello World</p>',
-
+    template: '<p style="background-color:{ {color} }">Hello World</p>',
     link: function(scope, elem, attrs) {
-
       elem.bind('click', function() {
-
         elem.css('background-color','white');
-
         scope.$apply(function() {
-
           scope.color = "white";
-
         });
-
       });
-
       elem.bind('mouseover', function() {
-
         elem.css('cursor', 'pointer');
-
       });
     }
   };
@@ -273,35 +210,24 @@ app.directive('helloWorld', function() {
 
 ```html
 <body ng-controller="MainCtrl">
-
   <input type="text" ng-model="color" placeholder="Enter a color"/>
-
   <hello-world/>
-
 </body>
 ```
 
-**选择一：**使用 @ 实现单向文本绑定上面的代码现在是不能工作的。因为我们用了一个隔离的scope，指令内部的 {{color}} 表达式被隔离在指令内部的scope中(不是父scope)。但是外面的输入框元素中的 ng-model 指令是指向父scope中的 color 属性的。所以，我们需要一种方式来绑定隔离scope和父scope中的这两个参数。在Angular中，这种数据绑定可以通过为指令所在的HTML元素添加属性和并指令定义对象中配置相应的 scope 属性来实现。让我们来细究一下建立数据绑定的几种方式。
+**选择一：**使用 @ 实现单向文本绑定上面的代码现在是不能工作的。因为我们用了一个隔离的scope，指令内部的 `{ {color} }` 表达式被隔离在指令内部的scope中(不是父scope)。但是外面的输入框元素中的 ng-model 指令是指向父scope中的 color 属性的。所以，我们需要一种方式来绑定隔离scope和父scope中的这两个参数。在Angular中，这种数据绑定可以通过为指令所在的HTML元素添加属性和并指令定义对象中配置相应的 scope 属性来实现。让我们来细究一下建立数据绑定的几种方式。`
 
-在下面的指令定义中，我们指定了隔离scope中的属性 color 绑定到指令所在HTML元素上的参数 colorAttr。在HTML标记中，你可以看到 {{color}}表达式被指定给了 color-attr 参数。当表达式的值发生改变时，color-attr 参数也跟着改变。隔离scope中的 color 属性的值也相应地被改变。
+在下面的指令定义中，我们指定了隔离scope中的属性 color 绑定到指令所在HTML元素上的参数 colorAttr。在HTML标记中，你可以看到 `{ {color} }`表达式被指定给了 color-attr 参数。当表达式的值发生改变时，color-attr 参数也跟着改变。隔离scope中的 color 属性的值也相应地被改变。
 
 ```javascript
 app.directive('helloWorld', function() {
-
   return {
-
     scope: {
-
       color: '@colorAttr'
-
     },
-
     ....
-
     // the rest of the configurations
-
   };
-
 });
 ```
 
@@ -309,42 +235,31 @@ app.directive('helloWorld', function() {
 
 ```html
 <body ng-controller="MainCtrl">
-
   <input type="text" ng-model="color" placeholder="Enter a color"/>
-
-  <hello-world color-attr="{{color}}"/>
-
+  <hello-world color-attr="{ {color} }"/>
 </body>
 ```
 
-注意点：我们称这种方式为单项绑定，是因为在这种方式下，你只能将字符串(使用表达式{{}})传递给参数。当父scope的属性变化时，你的隔离scope模型中的属性值跟着变化。你甚至可以在指令内部监控这个scope属性的变化，并且触发一些任务。然而，反向的传递并不工作。你不能通过对隔离scope属性的操作来改变父scope的值。
+注意点：我们称这种方式为单项绑定，是因为在这种方式下，你只能将字符串(使用表达式`{ {} }`)传递给参数。当父scope的属性变化时，你的隔离scope模型中的属性值跟着变化。你甚至可以在指令内部监控这个scope属性的变化，并且触发一些任务。然而，反向的传递并不工作。你不能通过对隔离scope属性的操作来改变父scope的值。
 
 当隔离scope属性和指令元素参数的名字一样是，你可以更简单的方式设置scope绑定：
 
 ```javascript
 app.directive('helloWorld', function() {
-
   return {
-
     scope: {
-
       color: '@'
-
     },
-
     ....
-
     // the rest of the configurations
-
   };
-
 });
 ```
 
 相应使用指令的HTML代码如下：
 
 ```html
-<hello-world color="{{color}}"/>
+<hello-world color="{ {color} }"/>
 ```
 
 **选择二：**使用 = 实现双向绑定
@@ -353,21 +268,13 @@ app.directive('helloWorld', function() {
 
 ```javascript
 app.directive('helloWorld', function() {
-
   return {
-
     scope: {
-
       color: '='
-
     },
-
     ....
-
     // the rest of the configurations
-
   };
-
 });
 ```
 
@@ -375,11 +282,8 @@ app.directive('helloWorld', function() {
 
 ```html
 <body ng-controller="MainCtrl">
-
   <input type="text" ng-model="color" placeholder="Enter a color"/>
-
   <hello-world color="color"/>
-
 </body>
 ```
 
@@ -389,21 +293,13 @@ app.directive('helloWorld', function() {
 
 ```javascript
 app.directive('sayHello', function() {
-
   return {
-
     scope: {
-
       sayHelloIsolated: '&amp;'
-
     },
-
     ....
-
     // the rest of the configurations
-
   };
-
 });
 ```
 
@@ -411,11 +307,8 @@ app.directive('sayHello', function() {
 
 ```html
 <body ng-controller="MainCtrl">
-
   <input type="text" ng-model="color" placeholder="Enter a color"/>
-
   <say-hello sayHelloIsolated="sayHello()"/>
-
 </body>
 ```
 
@@ -437,17 +330,11 @@ Transclusion是让我们的指令包含任意内容的方法。我们可以延�
 
 ```javascript
 app.directive('outputText', function() {
-
   return {
-
     transclude: true,
-
     scope: {},
-
     template: '<div ng-transclude></div>'
-
   };
-
 });
 ```
 
@@ -455,13 +342,11 @@ app.directive('outputText', function() {
 
 ```html
 <div output-text>
-
-  <p>Hello {{name}}</p>
-
+  <p>Hello { {name} }</p>
 </div>
 ```
 
-transclude:’element’ 和 transclude:true的区别ng-transclude 指明在哪里放置被嵌入的内容。在这个例子中DOM内容 <p>Hello {{name}}</p> 被提取和放置到 <div ng-transclude></div> 内部。有一个很重要的点需要注意的是，表达式{{name}}所对应的属性是在父scope中被定义的，而非子scope。你可以在这个Plunker例子中做一些实验。如果你想要学习更多关于scope的知识，可以阅读[这篇文章](https://github.com/angular/angular.js/wiki/Understanding-Scopes)。
+transclude:’element’ 和 transclude:true的区别ng-transclude 指明在哪里放置被嵌入的内容。在这个例子中DOM内容 <p>Hello { {name} }</p> 被提取和放置到 <div ng-transclude></div> 内部。有一个很重要的点需要注意的是，表达式{ {name} }所对应的属性是在父scope中被定义的，而非子scope。你可以在这个Plunker例子中做一些实验。如果你想要学习更多关于scope的知识，可以阅读[这篇文章](https://github.com/angular/angular.js/wiki/Understanding-Scopes)。
 
 有时候我我们要嵌入指令元素本身，而不仅仅是它的内容。在这种情况下，我们需要使用 transclude:’element’。它和 transclude:true 不同，它将标记了 ng-transclude 指令的元素一起包含到了指令模板中。使用transclusion，你的link函数会获得一个名叫 transclude 的链接函数，这个函数绑定了正确的指令scope，并且传入了另一个拥有被嵌入DOM元素拷贝的函数。你可以在这个 transclude 函数中执行比如修改元素拷贝或者将它添加到DOM上等操作。 类似 ng-repeat 这样的指令使用这种方式来重复DOM元素。仔细研究一下这个Plunker，它使用这种方式复制了DOM元素，并且改变了第二个实例的背景色。
 
@@ -473,27 +358,16 @@ transclude:’element’ 和 transclude:true的区别ng-transclude 指明在哪�
 
 ```javascript
 app.directive('outerDirective', function() {
-
   return {
-
     scope: {},
-
     restrict: 'AE',
-
     controller: function($scope, $compile, $http) {
-
       // $scope is the appropriate scope for the directive
-
       this.addChild = function(nestedDirective) { // this refers to the controller
-
         console.log('Got the message from nested directive:' + nestedDirective.message);
-
       };
-
     }
-
   };
-
 });
 ```
 
@@ -501,23 +375,14 @@ JavaScript这个代码为指令添加了一个名叫 outerDirective 的controlle
 
 ```javascript
 app.directive('innerDirective', function() {
-
   return {
-
     scope: {},
-
     restrict: 'AE',
-
     require: '^outerDirective',
-
     link: function(scope, elem, attrs, controllerInstance) {
-
       //the fourth argument is the controller instance you require
-
       scope.message = "Hi, Parent directive";
-
       controllerInstance.addChild(scope);
-
     }
   };
 });
@@ -543,21 +408,13 @@ require: ‘^outerDirective’ 告诉Angular在元素以及它的父元素中搜
 
 ```javascript
 app.directive('notepad', function(notesFactory) {
-
   return {
-
     restrict: 'AE',
-
     scope: {},
-
     link: function(scope, elem, attrs) {
-
     },
-
     templateUrl: 'templateurl.html'
-
   };
-
 });
 ```
 
@@ -573,23 +430,14 @@ app.directive('notepad', function(notesFactory) {
 
 ```html
 <div class="note-area" ng-show="!editMode">
-
   <ul>
-
     <li ng-repeat="note in notes|orderBy:'id'">
-
-      <a href="#" ng-click="openEditor(note.id)">{{note.title}}</a>
-
+      <a href="#" ng-click="openEditor(note.id)">{ {note.title} }</a>
     </li>
-
   </ul>
-
 </div>
-
 <div id="editor" ng-show="editMode" class="note-area" contenteditable="true" ng-bind="noteText"></div>
-
 <span><a href="#" ng-click="save()" ng-show="editMode">Back</a></span>
-
 <span><a href="#" ng-click="openEditor()" ng-show="!editMode">Add Note</a></span>
 ```
 
@@ -608,13 +456,9 @@ note 对象中封装了 title，id 和 content。几个重要的注意点：
 
 ```javascript
 scope.restore = function() {
-
   scope.editMode = false;
-
   scope.index = -1;
-
   scope.noteText = '';
-
 };
 ```
 
@@ -626,41 +470,23 @@ scope.restore = function() {
 
 ```javascript
 scope.openEditor = function(index) {
-
   scope.editMode = true;
-
   if (index !== undefined) {
-
     scope.noteText = notesFactory.get(index).content;
-
     scope.index = index;
-
   } else {
-
     scope.noteText = undefined;
-
   }
-
 };
-
 scope.save = function() {
-
   if (scope.noteText !== '') {
-
     var note = {};
-
     note.title = scope.noteText.length > 10 ? scope.noteText.substring(0, 10) + '. . .' : scope.noteText;
-
     note.content = scope.noteText;
-
     note.id = scope.index != -1 ? scope.index : localStorage.length;
-
     scope.notes = notesFactory.put(note);
-
   }
-
   scope.restore();
-
 };
 ```
 
@@ -677,15 +503,10 @@ openEditor 为编辑器做准备工作。如果我们在编辑一个笔记，它
 
 ```javascript
 var editor = elem.find('#editor');
-
 scope.restore();  // initialize our app controls
-
 scope.notes = notesFactory.getAll(); // load notes
-
 editor.bind('keyup keydown', function() {
-
   scope.noteText = editor.text().trim();
-
 });
 ```
 
@@ -695,7 +516,6 @@ editor.bind('keyup keydown', function() {
 
 ```html
 <h1 class="title">The Note Making App</h1>
-
 <notepad/>
 ```
 
