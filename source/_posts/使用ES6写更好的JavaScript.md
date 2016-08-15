@@ -1,6 +1,6 @@
 ---
 title: 使用 ES6 写更好的 JavaScript
-tages: [javascript,es6]
+tags: [javascript,es6]
 date: 2016/05/30
 ---
 
@@ -48,13 +48,11 @@ function baz() {
     }
     // foo 和 bar 这里都可见 
     console.log("This situation is " + foo + bar + ". I'm going home.");
-
     try {
         console.log("This log statement is " + foobar + "! It threw a ReferenceError at me!");
     } catch (err) {
         console.log("You got a " + err + "; no dice.");
     }
-
     try {
         console.log("Just to prove to you that " + err + " doesn't exit outside of the above `catch` block.");
     } catch (err) {
