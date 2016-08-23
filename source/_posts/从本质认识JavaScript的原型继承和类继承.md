@@ -1,6 +1,6 @@
 ---
 title: 从本质认识JavaScript的原型继承和类继承
-tags: [javascript,ES6]
+tags: [javascript,es6]
 date: 2016/03/31
 ---
 

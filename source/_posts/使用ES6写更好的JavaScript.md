@@ -1,5 +1,5 @@
 ---
-title: 使用 ES6 写更好的 JavaScript
+title: 使用ES6写更好的JavaScript
 tags: [javascript,es6]
 date: 2016/05/30
 ---

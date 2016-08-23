@@ -1,6 +1,6 @@
 ---
 title: 解决g++command not found
-tags: [linux,g++]
+tags: [linux]
 date: 2013/10/11
 ---
 
