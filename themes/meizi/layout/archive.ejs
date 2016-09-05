@@ -1,0 +1,13 @@
+<div class="am-g">
+    <div class="am-u-sm-12">
+        <ul class="am-list">
+            <% page.posts.sort('-date').each(function(obj,i){ %>
+                <li>
+                    <a href="<%= url_for(obj.path) %>" target="_blank">
+                        <%= obj.title %>
+                    </a>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+</div>

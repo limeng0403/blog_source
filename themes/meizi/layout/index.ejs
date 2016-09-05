@@ -1,0 +1,26 @@
+<div class="am-g">
+    <div class="am-u-md-3">
+        <ul class="am-list">
+            <% site.tags.each(function(obj,i){ %>
+                <li class="am-cf">
+                    <a class="am-fl" href="<%= url_for('tags/'+obj.name+'/') %>" target="_blank" style="width: 100%;">
+                        <%= obj.name %>
+                        <span class="am-fr am-badge am-badge-primary am-round"><%= obj.length %></span>
+                    </a>
+                    
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+    <div class="am-u-md-9">
+        <ul class="am-list am-list-static am-list-border am-list-striped">
+            <% site.posts.sort('-date').each(function(obj,i){ %>
+                <li>
+                    <a href="<%= url_for(obj.path) %>" target="_blank">
+                        <%= obj.title %>
+                    </a>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+</div>

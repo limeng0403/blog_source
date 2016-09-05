@@ -1,0 +1,38 @@
+<div class="am-g">
+    <div class="am-u-sm-12">
+        <article class="am-article">
+            <div class="am-article-hd">
+                <h1 class="am-article-title"><%= page.title %></h1>
+                <p class="am-article-meta">
+                    <%- date(page.date, 'MM/DD/YYYY') %>
+                </p>
+            </div>
+            <div class="am-article-bd">
+                <p class="am-article-lead">
+                    <% page.tags.each(function(o,i){ %>
+                            <%= o.name %>
+                    <% }) %>
+                </p>
+                <%- page.content %>
+            </div>
+        </article>
+    </div>
+</div>
+<!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="<%- date(page.date, 'X') %><%= page.title %>" data-title="<%= page.title %>" data-url="<%= config.url %>/<%= page.path %>"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {
+    short_name: "44162148"
+};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';
+    ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+<!-- 多说公共JS代码 end -->
